@@ -45,9 +45,7 @@ class ApplicationController < Sinatra::Base
 
 
 	get '/' do 
-
-		# "<h1> IT'S APP TIME SUCKAS </h1>"
-		redirect '/items'
+		erb :home
 	end
 
 
