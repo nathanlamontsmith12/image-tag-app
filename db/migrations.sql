@@ -5,11 +5,11 @@ CREATE DATABASE super_rad;
 \c super_rad; 
 
 
-CREATE TABLE admins (
+CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	username VARCHAR(64),
 	password_digest VARCHAR(60),
-	is_admin? BOOLEAN  
+	is_admin BOOLEAN  
 );
 
 CREATE TABLE images (

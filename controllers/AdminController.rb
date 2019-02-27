@@ -1,7 +1,7 @@
 class AdminController < ApplicationController	
 
 	before ['/register'] do 
-		if not (session[:logged_in] and session[:admin]) 
+		if not session[:logged_in]
 			session[:message] = "You must have administrator access to do that!"
 		end
 	end
@@ -27,43 +27,33 @@ class AdminController < ApplicationController
 	post '/login' do 
 		# check login 
 		
-		admin = Admin.find_by params[:username]
-
-		if not admin 
-			session[:message] = "Failed to log in"
-			redirect '/admin/login'
-		end
-
-		if not admin.is_admin? 
-			session[:message] = "Failed to log in"
-			redirect '/admin/login'
-		end
+		admin = User.find_by params[:username]
 
 		pw = params[:password]
 
-		if admin.authenticate(pw) 
+		if not (admin and admin.authenticate(pw))
+			session[:message] = "Failed to log in"
+			redirect '/admin/login'
+		else 
 			session[:logged_in] = true 
 			session[:username] = params[:username]
 			session[:admin] = true 
 			session[:message] = "Logged in as administrator #{admin.username}"
-			erb :new_image 
-		else 
-			session[:message] = "Failed to log in"
-			redirect '/admin/login'			
+			erb :new_image 		
 		end
 	end
 
 	post '/register' do 
 
-		if params[:key] != ENV[:ADMIN_KEY] 
+		if params[:key] != ENV["ADMIN_KEY"].to_s 
 			session[:message] = "Incorrect Administrator Key"
 			redirect '/admin/register'
 		else 
-			new_admin = Admin.new 
+			new_admin = User.new 
 
 			new_admin.username = params[:username]
 			new_admin.password = params[:password]
-			new_admin.is_admin? = true 
+			new_admin.is_admin = true 
 
 			session[:message] = "Created new administrator"
 
