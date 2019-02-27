@@ -11,10 +11,8 @@ class ImageController < ApplicationController
 		# get a random image url from database  
 		rand_image = Image.all.sample 
 
-		pp rand_image
-		puts rand_image.image_url
-
 		@image_url = rand_image.image_url
+		@image_id = rand_image.id 
 
 		erb :show_image
 	end
@@ -43,4 +41,15 @@ class ImageController < ApplicationController
 	end
 
 
+	post '/:id' do 
+		new_tag = Tag.new 
+		new_tag.image_id = params[:id] 
+		new_tag.image_tag = params[:tag]
+
+		new_tag.save 
+
+		redirect '/image'
+	end
+
 end
+
