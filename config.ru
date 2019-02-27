@@ -2,16 +2,15 @@ require 'sinatra/base'
 
 
 # controllers: 
-require './AdminController.rb'
-require './ApplicationController.rb'
-require './TagController.rb'
-require './ImageController.rb'
+require './controllers/AdminController'
+require './controllers/ApplicationController'
+require './controllers/ImageController'
 
 
 # models: 
 require './models/AdminModel'
+require './models/TagModel'
 require './models/ImageModel'
-require './models/TagController'
 
 
 # maps: 
