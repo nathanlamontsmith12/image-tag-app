@@ -11,7 +11,6 @@ CREATE TABLE admins (
 	password_digest VARCHAR(60)  
 );
 
-
 CREATE TABLE images (
 	id SERIAL PRIMARY KEY, 
 	image_url VARCHAR(255)
@@ -20,5 +19,6 @@ CREATE TABLE images (
 CREATE TABLE tags (
 	id SERIAL PRIMARY KEY,
 	image_id REFERENCES image(id),
-	image_tag VARCHAR(128)
+	image_tag VARCHAR(255)
 );
+

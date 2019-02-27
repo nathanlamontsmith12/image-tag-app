@@ -1,4 +1,4 @@
-class ImageController < Sinatra::Base 
+class ImageController < ApplicationController 
 
 	get '/' do 
 		erb :new_image 

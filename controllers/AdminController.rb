@@ -1,4 +1,4 @@
-class AdminController < Sinatra::Base	
+class AdminController < ApplicationController	
 
 	get '/' do 
 		redirect '/'

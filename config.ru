@@ -2,8 +2,8 @@ require 'sinatra/base'
 
 
 # controllers: 
-require './controllers/AdminController'
 require './controllers/ApplicationController'
+require './controllers/AdminController'
 require './controllers/ImageController'
 
 
