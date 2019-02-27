@@ -1,0 +1,15 @@
+development: 
+  adapter: postgresql
+  host: localhost 
+  database: sea_otter_items 
+  username: <%= ENV['PG_USER'] %>
+  password: <%= ENV['PG_PASS'] %>
+
+production: 
+  adapter: postgresql
+  encoding: unicode 
+  pool: 5
+  host: <%= ENV['DATABASE_HOST'] %>
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['PG_USER'] %>
+  password: <%= ENV['PG_PASS'] %>
