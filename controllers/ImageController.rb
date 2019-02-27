@@ -1,15 +1,20 @@
 class ImageController < ApplicationController 
 
 	before ['/new', '/submit'] do 
-
-		# filter for logged in as ADMIN 
-
+		if not (session[:logged_in] and session[:admin]) 
+			session[:message] = "You must have administrator access to do that!"
+		end
 	end
 
 
 	get '/' do 
-		# later on will have to get this from the database 
-		@img_url = ""
+		random_id = rand(Image.count) 
+
+		if random_id 
+			@image_url = Image.find random_id 
+		else 
+			@image_url = ""
+		end
 
 		erb :show_image
 	end
@@ -28,7 +33,6 @@ class ImageController < ApplicationController
 
 
 	post '/new' do 
-
 		image = Image.new 
 		image.image_url = params[:image_url]
 		image.save 
