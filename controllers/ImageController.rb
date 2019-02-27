@@ -1,7 +1,7 @@
 class ImageController < ApplicationController 
 
 	get '/' do 
-		erb :new_image 
+		erb :show_image
 	end
 
 end
