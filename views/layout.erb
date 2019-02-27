@@ -11,6 +11,10 @@
 			<nav>
 				<a href="/">Instructions</a>
 				<a href="/image">Tag Images</a>
+				<% if session[:logged_in] %>
+					<a href="/image/new">Add Image</a>
+					<a href="/admin/logout">Logout</a>
+				<% end %>
 			</nav>
 		</div>
 	</header>

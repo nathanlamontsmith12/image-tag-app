@@ -1,7 +1,7 @@
 development: 
   adapter: postgresql
   host: localhost 
-  database: sea_otter_items 
+  database: super_rad 
   username: <%= ENV['PG_USER'] %>
   password: <%= ENV['PG_PASS'] %>
 
