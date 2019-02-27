@@ -8,4 +8,9 @@ class AdminController < ApplicationController
 		erb :admin_login
 	end
 
+	post '/login' do 
+		# check login 
+		
+	end
+
 end

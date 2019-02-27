@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS dream_logic;
+DROP DATABASE IF EXISTS super_rad;
 
-CREATE DATABASE dream_logic; 
+CREATE DATABASE super_rad; 
 
-\c dream_logic; 
+\c super_rad; 
 
 
 CREATE TABLE admins (
@@ -18,7 +18,7 @@ CREATE TABLE images (
 
 CREATE TABLE tags (
 	id SERIAL PRIMARY KEY,
-	image_id REFERENCES image(id),
+	image_id INTEGER REFERENCES image(id),
 	image_tag VARCHAR(255)
 );
 
