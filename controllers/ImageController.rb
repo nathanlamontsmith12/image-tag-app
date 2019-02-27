@@ -8,13 +8,13 @@ class ImageController < ApplicationController
 
 
 	get '/' do 
-		random_id = rand(Image.count) 
+		# get a random image url from database  
+		rand_image = Image.all.sample 
 
-		if random_id 
-			@image_url = Image.find random_id 
-		else 
-			@image_url = ""
-		end
+		pp rand_image
+		puts rand_image.image_url
+
+		@image_url = rand_image.image_url
 
 		erb :show_image
 	end

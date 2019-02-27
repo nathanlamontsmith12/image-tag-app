@@ -14,7 +14,7 @@ CREATE TABLE users (
 
 CREATE TABLE images (
 	id SERIAL PRIMARY KEY, 
-	image_url VARCHAR(255)
+	image_url TEXT
 );
 
 CREATE TABLE tags (

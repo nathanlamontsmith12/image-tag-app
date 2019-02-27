@@ -1,7 +1,5 @@
 <h3> CHECK IMAGE </h3>
 
-<img src="<%= @image_url %>"/>
-
 <h4>Is this the image you wanted to add?</h4>
 
 <form action="/image/new" method="POST">
@@ -13,3 +11,5 @@
 <form action="/image/new" method="GET">
 	<button> NO </button>
 </form>
+
+<img src="<%= @image_url %>"/>
