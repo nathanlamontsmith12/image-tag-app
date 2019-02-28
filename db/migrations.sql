@@ -8,7 +8,8 @@ CREATE DATABASE super_rad;
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	username VARCHAR(64),
-	password_digest VARCHAR(60),
+	password VARCHAR,
+	-- password_digest VARCHAR(60),
 	is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
