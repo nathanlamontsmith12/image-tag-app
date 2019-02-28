@@ -63,7 +63,7 @@ class AdminController < ApplicationController
 			extant_user.is_admin = true 
 			extant_user.save 
 			session[:message] = "Gave #{extant_user.username} administrator access"
-			redirect '/admin/login' 
+			redirect '/admin/register' 
 		end
 
 	end

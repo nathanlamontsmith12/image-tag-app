@@ -5,31 +5,40 @@
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
+	<div class="admin">
+		<nav>
+		<% if session[:logged_in] and session[:is_admin] %>
+			<strong><p>Admin: <%= session[:username] %></p></strong>
+		<% end %>
+			<% if session[:logged_in] and session[:is_admin] %>
+				<a href="/image/new">Add Image</a> 
+				<a href="/admin/logout">Logout</a> 
+				<a href="/admin/register">Admin: Register</a>
+			<% else %>
+				<a href="/admin/login">Admin: Log In</a>
+			<% end %>
+		</nav>
+	</div>
+
 	<header>
 		<h1> IMAGE TAGGER </h1>
-		<div>
-			<% if session[:logged_in] and session[:is_admin] %>
-				<h4>Logged in as administrator <%= session[:username] %></h4>
-			<% end %>
-			<nav>
-				<a href="/">Instructions</a>
-				<a href="/image">Tag Images</a>
-				<% if session[:logged_in] and session[:is_admin] %>
-					<a href="/image/new">Add Image</a>
-					<a href="/admin/logout">Logout</a>
-				<% end %>
-			</nav>
-		</div>
 	</header>
 
+	<div class="userNavCont">
+		<nav class="userNav">
+			<a href="/">Instructions</a>  
+			<a href="/image">Tag Images</a> 
+		</nav>
+	</div>
+
+
+	<main>
 	<% if session[:message] %>
 		<h4> <%= session[:message] %> </h4>
 		<% session[:message] = nil %>
 	<% else %>
 		<h4> &nbsp; </h4>
 	<% end %>
-
-	<main>
 		<%= yield %>
 	</main>
 
