@@ -8,10 +8,13 @@
 	<header>
 		<h1> IMAGE TAGGER </h1>
 		<div>
+			<% if session[:logged_in] and session[:is_admin] %>
+				<h4>Logged in as administrator <%= session[:username] %></h4>
+			<% end %>
 			<nav>
 				<a href="/">Instructions</a>
 				<a href="/image">Tag Images</a>
-				<% if session[:logged_in] %>
+				<% if session[:logged_in] and session[:is_admin] %>
 					<a href="/image/new">Add Image</a>
 					<a href="/admin/logout">Logout</a>
 				<% end %>

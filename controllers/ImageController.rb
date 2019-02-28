@@ -1,8 +1,9 @@
 class ImageController < ApplicationController 
 
 	before ['/new', '/submit'] do 
-		if not (session[:logged_in] and session[:admin]) 
-			session[:message] = "You must have administrator access to do that!"
+		if not (session[:logged_in] and session[:is_admin])
+			session[:message] = "You must be logged in as an administrator to do that!"
+			redirect '/admin/login'
 		end
 	end
 
@@ -11,8 +12,12 @@ class ImageController < ApplicationController
 		# get a random image url from database  
 		rand_image = Image.all.sample 
 
-		@image_url = rand_image.image_url
-		@image_id = rand_image.id 
+		@image_url = ""
+
+		if rand_image 
+			@image_url = rand_image.image_url
+			@image_id = rand_image.id 
+		end 
 
 		erb :show_image
 	end
@@ -42,13 +47,21 @@ class ImageController < ApplicationController
 
 
 	post '/:id' do 
-		new_tag = Tag.new 
-		new_tag.image_id = params[:id] 
-		new_tag.image_tag = params[:tag]
 
-		new_tag.save 
+		if (params[:tag] and params[:tag].length > 0)
+			new_tag = Tag.new 
+			new_tag.image_id = params[:id] 
+			new_tag.image_tag = params[:tag] 
+
+			new_tag.save 
+		end 
 
 		redirect '/image'
+	end
+
+
+	post '/' do 
+		redirect '/'
 	end
 
 end

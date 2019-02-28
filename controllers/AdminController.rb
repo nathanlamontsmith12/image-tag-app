@@ -1,9 +1,10 @@
 class AdminController < ApplicationController	
 
 	before ['/register'] do 
-		# if not (session[:logged_in] and session[:is_admin]
-		# 	session[:message] = "You must have administrator access to do that!"
-		# end
+		if not (session[:logged_in] and session[:is_admin])
+			session[:message] = "You must be logged in as an administrator to do that!"
+			redirect '/admin/login'
+		end
 	end
 
 
@@ -35,14 +36,14 @@ class AdminController < ApplicationController
 
 		pw = params[:password]
 
-		if not (admin and admin.authenticate(pw))
-			session[:message] = "Failed to log in"
+		if not (admin and admin.authenticate(pw) and admin.is_admin)
+			session[:message] = "Failed to log in as administrator"
 			redirect '/admin/login'
 		else 
 			session.destroy 
 			session[:logged_in] = true 
 			session[:username] = params[:username]
-			session[:admin] = true 
+			session[:is_admin] = true 
 			session[:message] = "Logged in as administrator #{admin.username}"
 			
 			redirect '/image/new' 		
@@ -52,39 +53,18 @@ class AdminController < ApplicationController
 
 	post '/register' do 
 
-		# if params[:key] != ENV["ADMIN_KEY"].to_s 
-		# 	session[:message] = "Incorrect Administrator Key"
-		# 	redirect '/admin/register'
-		# else 
-		# 	new_admin = User.new 
-
-		# 	new_admin.username = params[:username]
-		# 	new_admin.password = params[:password]
-		# 	new_admin.is_admin = true 
-
-		# 	session[:message] = "Created new administrator"
-
-		# 	redirect '/admin/login' 
-		# end
-
 		extant_user = User.find_by username: params[:username]
 
-		if extant_user 
-			session[:message] = "An admin with that username already exists!"
+		if not extant_user 
+			session[:message] = "No such user is in the database"
 			redirect 'admin/register'
+		else 
+			extant_user.is_admin = true 
+			extant_user.save 
+			session[:message] = "Gave #{extant_user.username} administrator access"
+			redirect '/admin/login' 
 		end
 
-		new_admin = User.new 
-
-		new_admin.username = params[:username]
-		new_admin.password = params[:password]
-		new_admin.is_admin = true 
-
-		new_admin.save 
-
-		session[:message] = "Created new administrator"
-
-		redirect '/admin/login' 
 	end
 
 end
