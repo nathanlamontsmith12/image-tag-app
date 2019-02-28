@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS super_rad;
+DROP DATABASE IF EXISTS super_rad_helper;
 
 CREATE DATABASE super_rad_helper; 
 
