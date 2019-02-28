@@ -1,7 +1,7 @@
 development: 
   adapter: postgresql
   host: localhost 
-  database: super_rad 
+  database: super_rad_helper
   username: <%= ENV['PG_USER'] %>
   password: <%= ENV['PG_PASS'] %>
 

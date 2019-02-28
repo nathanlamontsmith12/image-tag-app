@@ -49,13 +49,13 @@ class ApplicationController < Sinatra::Base
 	end
 
 
-	# get '/test' do 
+	get '/test' do 
 
-	# 	binding.pry 
+		binding.pry 
 
-	# 	redirect '/'
+		redirect '/'
 
-	# end
+	end
 
 
 	get '*' do 
